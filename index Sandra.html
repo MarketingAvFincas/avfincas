@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AV Fincas — Portfolio Inmobiliario</title>
+    
+    <!-- Tipografía Lato -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;900&display=swap" rel="stylesheet">
+    
+    <style>
+    @keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+    :root {
+            --corp: #5c768b; /* Azul grisáceo AV Fincas */
+            --dark: #121212; /* Negro puro para contraste radical */
+            --bg: #f9f9f9;   /* Fondo roto, estilo galería de arte */
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Lato', sans-serif; scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--dark); overflow-x: hidden; }
+        
+        /* HEADER REINVENTADO: LOGO GRANDE Y MENÚ PERFECTAMENTE ALINEADOS */
+        nav {
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; /* Alinea verticalmente el logo y los textos al centro perfecto */
+            padding: 25px 5%; 
+            background: rgba(249, 249, 249, 0.95); /* Fondo sutil con transparencia estilo galería */
+            backdrop-filter: blur(10px);
+            position: fixed; /* Se queda fijo arriba al hacer scroll sin romper nada */
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        /* Contenedor del Logo */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 18px; /* Un poco más de espacio */
+        }
+        .logo-img {
+            height: 60px; /* Resalta mucho más */
+            width: auto;
+            object-fit: contain;
+        }
+        .logo-texto { 
+            font-weight: 900; 
+            font-size: 1.5rem; /* Letra ligeramente más grande para acompañar */
+            letter-spacing: 2px; 
+            color: var(--dark); 
+            text-transform: uppercase; 
+            line-height: 1;
+        }
+        .logo-texto span { font-weight: 300; color: var(--corp); }
+
+        /* El Menú de Enlaces Estilizado */
+        nav ul { 
+            display: flex; 
+            list-style: none; 
+            gap: 40px; 
+            align-items: center; /* Asegura que las letras del menú se alineen con el centro del logo */
+        }
+        nav ul a { 
+            text-decoration: none; 
+            color: var(--dark); 
+            font-weight: 400; 
+            font-size: 0.85rem; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            transition: color 0.3s ease; 
+        }
+        nav ul a:hover { 
+            color: var(--corp); /* Tu azul grisáceo al pasar el ratón */
+        }
+
+        /* HERO / SOBRE MÍ - UNIFICADO Y CORREGIDO (Sin hueco en blanco) */
+        /* CORRECCIÓN DEL HERO PARA QUE QUEDE EN PARALELO */
+        .hero {
+            padding: 160px 5% 60px 5% !important; 
+            display: grid !important; 
+            grid-template-columns: 1.2fr 1fr !important; 
+            align-items: center !important; 
+            gap: 60px !important;
+            background: var(--bg) !important;
+            min-height: auto !important;
+        }
+        
+        
+        .hero-text { padding-right: 40px; }
+        .hero-text h2 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 6px; color: var(--corp); margin-bottom: 20px; font-weight: 400; }
+        .hero-text h1 { font-size: 5.5rem; font-weight: 900; line-height: 0.95; color: var(--dark); letter-spacing: -2px; margin-bottom: 40px; }
+        
+        /* JUSTIFICADO DE TEXTO SEGURO */
+        .hero-text p { 
+            font-size: 1.2rem; 
+            font-weight: 300; 
+            line-height: 1.8; 
+            color: #555; 
+            max-width: 500px; 
+            text-align: justify !important; 
+            text-justify: inter-word;
+        }
+
+        /* CONTENEDOR DE LA FOTO (MÁS PEQUEÑO Y ESTILIZADO) */
+        .hero-img-wrapper { 
+            position: relative; 
+            width: 80%;           /* Reducido al 80% para que sea más pequeña */
+            height: 480px;        /* Altura más baja para encuadrar mejor */
+            margin: 0 auto;       /* Centrada elegantemente en su columna */
+            overflow: hidden; 
+            border-radius: 4px; 
+        }
+
+        /* LA FOTO TRATADA COMO ARTE (NUNCA SE PIXELA NI SE RECORTA) */
+        .hero-img-wrapper img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain;  /* CLAVE: Muestra la foto ENTERA sin recortar ni una esquina */
+            object-position: center;
+            image-rendering: -webkit-optimize-contrast; /* Fuerza al navegador a enfocar y dar nitidez */
+            transition: transform 0.7s ease; 
+        }
+        .hero-img-wrapper:hover img { transform: scale(1.03); }
+.hero-img-wrapper { 
+    position: relative; 
+    background: #f9f9f9; /* Debe ser IGUAL al --bg de tu CSS */
+    border-radius: 4px; 
+}
+.hero-img-wrapper img { 
+    mix-blend-mode: multiply; /* Esto ayuda a que el blanco de la foto "desaparezca" si la foto es un JPG con fondo blanco */
+}
+ /* --- SECCIÓN SERVICIOS: CÓDIGO ÚNICO Y ESTABLE --- */
+
+.servicios { 
+    padding: 140px 5% 120px 5% !important; 
+    background: #1c232e !important; 
+    color: #ffffff !important;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Título de la sección (Asegurado) */
+.section-header { margin-bottom: 80px; }
+.section-header span { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; color: var(--corp); display: block; }
+.section-header h2 { font-size: 3.5rem; font-weight: 900; letter-spacing: -1px; margin-top: 10px; color: #ffffff; }
+
+.grid-servicios { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 60px; 
+    align-items: start;
+}
+
+.s-card { 
+    border-top: 1px solid rgba(255, 255, 255, 0.2) !important; 
+    padding-top: 30px; 
+    position: relative; 
+    cursor: pointer;
+    box-shadow: none !important;
+    transform: none !important; 
+    transition: border-color 0.3s ease, color 0.3s ease !important;
+    
+    /* BLOQUEO DE VIBRACIONES */
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    transform: translateZ(0);
+}
+
+.s-card:hover {
+    border-top: 1px solid var(--corp) !important;
+    transform: none !important;
+}
+
+.s-card .num { 
+    font-size: 0.8rem; 
+    font-weight: 900; 
+    color: var(--corp); 
+    display: block; 
+    margin-bottom: 20px; 
+    transition: color 0.3s ease;
+}
+
+.s-card h3 { 
+    font-size: 1.8rem; 
+    font-weight: 900; 
+    margin-bottom: 15px; 
+    letter-spacing: -0.5px; 
+    color: #ffffff;
+    transition: color 0.3s ease;
+}
+
+.s-card p { 
+    font-size: 1rem; 
+    color: #cccccc; 
+    font-weight: 300; 
+    line-height: 1.6; 
+}
+
+/* Efectos Hover (Sin movimiento) */
+.s-card:hover .num { color: #ffffff !important; }
+.s-card:hover h3 { color: var(--corp) !important; }
+        /* SECCIÓN: CARTERA DE INMUEBLES */
+        .inmuebles { padding: 120px 0 120px 5%; background: var(--dark); color: var(--white); position: relative; }
+        .inmuebles .section-header h2 { color: var(--white); }
+        
+        .slider-wrapper { position: relative; margin-top: 60px; padding-right: 5%; }
+        .slider { display: flex; overflow-x: auto; gap: 40px; padding-bottom: 30px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+        .slider::-webkit-scrollbar { display: none; }
+        
+        .i-card { min-width: 450px; scroll-snap-align: start; cursor: pointer; }
+        .i-img-box { width: 100%; height: 500px; overflow: hidden; margin-bottom: 20px; background: #222; border-radius: 4px; }
+        .i-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
+        .i-card:hover .i-img-box img { transform: scale(1.05); }
+        .i-card h3 { font-size: 1.5rem; font-weight: 400; margin-bottom: 5px; }
+        .i-card p { font-size: 0.9rem; color: #888; font-weight: 300; text-transform: uppercase; letter-spacing: 1px; }
+        .i-card .price { font-size: 1.4rem; font-weight: 900; color: var(--corp); margin-top: 10px; }
+
+    
+/* Sección de Compromiso (Fondo distinto) */
+/* SECCIÓN COMPROMISO - DISEÑO PREMIUM */
+/* SECCIÓN COMPROMISO - AJUSTE A GRID IZQUIERDA */
+/* SECCIÓN COMPROMISO - DISEÑO ELEVADO */
+#vision {
+    background: #c3d9eb !important; /* Un azul ligeramente más profundo que antes */
+    padding: 120px 5% !important;
+    scroll-margin-top: 100px;
+    border-top: 2px solid #5c768b;
+}
+
+.vision-title {
+    margin-bottom: 80px;
+    padding-left: 0; /* Quitamos el espacio que dejaba para la línea */
+    border-left: none; /* Eliminamos la línea lateral */
+}
+
+.vision-title h2 {
+    font-size: 3.8rem !important;
+    color: #121212 !important;
+    letter-spacing: -1px;
+    margin: 0; /* Aseguramos que no tenga márgenes extraños */
+}
+
+.grid-vision {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* Tarjetas con estilo "elevado" */
+.tarjeta-desplegable {
+    background: #ffffff;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Sombra suave para profundidad */
+    cursor: pointer;
+    transition: all 0.4s ease;
+    border-radius: 4px;
+}
+
+.tarjeta-desplegable:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(92, 118, 139, 0.15);
+}
+
+.tarjeta-desplegable h3 {
+    font-size: 1.4rem;
+    font-weight: 900; /* Mucho más peso visual */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--corp);
+    display: flex;
+    justify-content: space-between;
+}
+
+.detalle {
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.7;
+    margin-top: 20px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+
+.tarjeta-desplegable.active .detalle {
+    max-height: 250px;
+    opacity: 1;
+}
+
+        /* CONTROLES DE LOS SLIDERS */
+        .controls { display: flex; gap: 15px; margin-top: 30px; }
+        .btn-slide { 
+            background: transparent; border: 1px solid rgba(255,255,255,0.2); color: var(--white); 
+            width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; 
+            justify-content: center; align-items: center; font-size: 1.2rem; transition: 0.3s;
+        }
+        .resenas .btn-slide { border-color: rgba(0,0,0,0.1); color: var(--dark); }
+        .btn-slide:hover { background: var(--corp); border-color: var(--corp); color: var(--white); }
+
+        /* SECCIÓN CONTACTO DIRECTO - EQUILIBRADA */
+        footer { 
+            padding: 140px 5% 0 5%; 
+            background: var(--white); 
+            border-top: 1px solid #eee; 
+        }
+        
+        footer .container-contacto {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            margin-bottom: 120px;
+            align-items: start;
+        }
+
+        /* Columna Izquierda */
+        .contacto-pro {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .contacto-pro h2 {
+            font-size: 3.8rem;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            color: var(--dark);
+            margin: 0;
+        }
+        .contacto-pro h2 span {
+            color: var(--corp);
+        }
+
+        /* Botón de WhatsApp */
+        .btn-whatsapp-directo {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--dark);
+            color: var(--white);
+            text-decoration: none;
+            padding: 20px 40px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 900;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            align-self: flex-start;
+        }
+        .btn-whatsapp-directo:hover {
+            background: var(--corp);
+            box-shadow: 0 10px 30px rgba(92, 118, 139, 0.2);
+        }
+        .btn-whatsapp-directo .flecha {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        .btn-whatsapp-directo:hover .flecha {
+            transform: translateX(5px);
+        }
+
+        /* MAPA PERFECTAMENTE INTEGRADO A LA IZQUIERDA */
+        .mapa-contenedor {
+            width: 100%;
+            height: 280px;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid #eee;
+            filter: grayscale(100%) contrast(90%);
+            transition: filter 0.5s ease;
+        }
+        .mapa-contenedor:hover {
+            filter: grayscale(0%) contrast(100%);
+        }
+        .mapa-contenedor iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Columna Derecha: Canales Directos e Información */
+        .contacto-info {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            padding-left: 60px;
+            border-left: 1px solid #eee;
+        }
+        .info-block h3 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--corp);
+            margin-bottom: 8px;
+            font-weight: 900;
+        }
+        .info-block p, .info-block a {
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: var(--dark);
+            text-decoration: none;
+            line-height: 1.4;
+        }
+
+        /* FRANJA CORPORATIVA INFERIOR (Mantiene el Copyright centrado) */
+        .franja-corporativa {
+            background: var(--corp);
+            color: var(--white);
+            padding: 40px 5%;
+            margin-left: -5.3%; 
+            margin-right: -5.3%;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 20px;
+        }
+        .franja-datos {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+        .dato-item {
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            font-weight: 300;
+        }
+        .dato-item strong {
+            font-weight: 900;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .footer-copyright {
+            grid-column: 2;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* RESPONSIVE Y ADAPTABILIDAD GENERAL */
+        @media (max-width: 968px) {
+            .hero { grid-template-columns: 1fr; padding-top: 140px; padding-bottom: 40px; gap: 40px; }
+            .hero-text h1 { font-size: 3.5rem; }
+            .hero-text { padding-right: 0; }
+            .hero-img-wrapper { height: 450px; width: 100%; }
+            .servicios { padding-top: 60px; }
+            .i-card { min-width: 300px; }
+            .i-img-box { height: 350px; }
+            .r-card { min-width: 100%; }
+            .r-card p { font-size: 1.4rem; }
+            
+            footer { padding-top: 80px; }
+            footer .container-contacto { grid-template-columns: 1fr; gap: 50px; margin-bottom: 60px; }
+            .contacto-pro h2 { font-size: 2.6rem; }
+            .btn-whatsapp-directo { width: 100%; justify-content: center; }
+            .contacto-info { padding-left: 0; border-left: none; gap: 30px; }
+            .info-block p, .info-block a { font-size: 1.2rem; }
+            .mapa-contenedor { height: 220px; }
+            
+            .franja-corporativa {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                margin-left: -6%;
+                margin-right: -6%;
+                gap: 25px;
+            }
+            .franja-datos { flex-direction: column; align-items: center; gap: 15px; }
+            .footer-copyright { white-space: normal; }
+        }
+      /* ==========================================================================
+   PANEL DE TRANSICIÓN PREMIUM (ESTILO IMAGEN)
+   ========================================================================== */
+/* Tarjetas estáticas y sólidas como una roca */
+        .s-card { 
+            border-top: 1px solid rgba(255, 255, 255, 0.2) !important; 
+            padding-top: 30px; 
+            position: relative; 
+            box-shadow: none !important; 
+            transform: none !important; 
+            transition: none !important; /* ELIMINAMOS TODA TRANSICIÓN */
+            /* Mantenemos la estructura fija */
+            backface-visibility: hidden;
+            -webkit-font-smoothing: subpixel-antialiased; /* Esto evita el baile de píxeles */
+        }
+
+        /* Cuando pasas el ratón: Solo cambiamos colores, nada que mueva un píxel */
+        .s-card:hover {
+            border-top: 1px solid var(--corp) !important;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Fuerza la estabilidad del texto */
+        .s-card h3, .s-card p, .s-card .num {
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            transform: translateZ(0); /* Aísla los textos de los efectos gráficos */
+        }
+/* --- RECUPERACIÓN TÍTULO CASOS DE ÉXITO --- */
+.resenas .section-header { 
+    margin-bottom: 60px; 
+    display: block !important; /* Asegura que sea visible */
+}
+
+.resenas .section-header span { 
+    font-size: 0.8rem; 
+    text-transform: uppercase; 
+    letter-spacing: 4px; 
+    color: var(--corp); 
+    display: block; 
+}
+
+.resenas .section-header h2 { 
+    font-size: 3.5rem; 
+    font-weight: 900; 
+    letter-spacing: -1px; 
+    margin-top: 10px; 
+    color: var(--dark); /* Color oscuro para el fondo claro */
+}
+/* Eliminar cualquier margen extraño entre bloques */
+.hero { margin-bottom: 0 !important; padding-bottom: 60px !important; }
+.panel-separador-premium { 
+    width: 100%; 
+    background: var(--bg); 
+    position: relative; 
+    z-index: 5; 
+   margin-top: -120px; /* Aumentamos el valor negativo para "subir" el panel y pegar las secciones */
+    margin-bottom: -40px; /* Esto ayuda a que el bloque inferior se pegue mejor */
+}
+/* --- BLOQUE DE ESPACIADO PROFESIONAL Y DEFINITIVO --- */
+
+/* 1. Limpieza de secciones: Igualamos todas para que tengan el mismo "aire" */
+#sobre-mi, .servicios, .inmuebles, .resenas {
+    padding: 100px 5% !important; 
+    margin: 0 !important;
+}
+
+/* 2. Ajuste específico para que el Hero empiece bien tras el menú fijo */
+#sobre-mi { padding-top: 180px !important; }
+
+/* 3. Panel separador: Lo liberamos de márgenes negativos que lo deformaban */
+.panel-separador-premium { 
+    width: 100%; 
+    background: var(--bg); 
+    position: relative; 
+    z-index: 5; 
+    margin: 0 !important; 
+    padding: 20px 0 !important; /* Espacio ligero pero visible */
+}
+
+/* 4. Footer: Necesita su propio espacio superior */
+footer { 
+    padding-top: 100px !important; 
+    background: var(--white); 
+}
+
+/* 5. Asegurar que no haya secciones vacías creando huecos */
+section:empty { display: none !important; }
+.servicios { margin-top: 0 !important; padding-top: 80px !important; }
+    /* Franja de acento superior */
+.top-accent-bar {
+    width: 100%;
+    height: 6px;
+    background: var(--corp);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999; /* Por encima de todo */
+}
+/* Limpieza total de márgenes conflictivos */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* AÑADE ESTO: Clase para separar secciones a tu gusto */
+.espaciado {
+    padding-top: 100px !important;
+    padding-bottom: 100px !important;
+}
+
+/* Ajustes básicos para evitar pantalla blanca */
+html, body { width: 100%; height: auto; overflow-x: hidden; }
+    /* 1. SISTEMA DE ESPACIADO GRANDE Y DEFINITIVO */
+/* Aplicamos padding de 200px arriba y abajo a todas las secciones principales */
+section, #sobre-mi, .servicios, .inmuebles, .resenas {
+    padding-top: 200px !important;
+    padding-bottom: 200px !important;
+    margin: 0 !important;
+}
+
+/* 2. Ajuste específico para el Hero para no perder su alineación tras el menú */
+#sobre-mi { 
+    padding-top: 250px !important; /* Más espacio bajo el menú fijo */
+    padding-bottom: 200px !important; 
+}
+
+/* 3. Footer: Le damos un respiro amplio */
+footer { 
+    padding-top: 200px !important; 
+    padding-bottom: 100px !important;
+}
+
+/* 4. Panel separador: Si lo mantienes, que tenga su propio aire */
+.panel-separador-premium { 
+    padding: 100px 0 !important; 
+}
+/* Aplicamos la animación a todas tus secciones principales */
+section, footer {
+    animation: fadeIn 1s ease-out forwards;
+    #sobre-mi { animation-delay: 0.2s; }
+.servicios { animation-delay: 0.4s; }
+.inmuebles { animation-delay: 0.6s; }
+footer { animation-delay: 0.8s; }
+}
+/* ELIMINAR EL BAILE: Animación de opacidad pura */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in-section {
+    animation: fadeIn 0.8s ease-in forwards;
+}
+
+/* EFECTO INTERACTIVO: Las tarjetas de servicios "flotan" al pasar el ratón */
+.s-card {
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+    padding: 30px;
+    background: transparent;
+}
+
+.s-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-10px); /* Esto es movimiento controlado, no "baile" */
+    border-top: 1px solid var(--corp) !important;
+}
+.slider {
+    display: flex;
+    overflow-x: auto;
+    gap: 40px;
+    padding-bottom: 30px;
+    scroll-snap-type: x mandatory; /* Esto hace que el scroll se "clave" en cada foto */
+    cursor: grab; /* Indica al usuario que es interactivo */
+}
+
+.slider:active { cursor: grabbing; }
+* TARJETAS ESTABLES: NADA BAILA */
+.s-card { 
+    border-top: 1px solid rgba(255, 255, 255, 0.2) !important; 
+    padding: 30px; 
+    position: relative; 
+    cursor: pointer;
+    transition: border-color 0.4s ease !important; /* Solo cambiamos el color, no la posición */
+    background: transparent;
+}
+
+.s-card:hover {
+    border-top: 1px solid var(--corp) !important;
+}
+
+/* ESTILO CUANDO ESTÁ "ACTIVO" (CLICADO) */
+.s-card.active {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.s-card h3 { 
+    font-size: 1.8rem; 
+    font-weight: 900; 
+    color: #ffffff;
+    transition: color 0.3s ease;
+}
+
+.s-card p { 
+    font-size: 1rem; 
+    color: #cccccc; 
+    line-height: 1.6;
+    margin-top: 15px;
+}
+    </style>
+</head>
+<body>
+<div class="top-accent-bar"></div>
+    <nav>
+        <div class="logo-container">
+            <!-- 1. LOGO DE LA EMPRESA (Guarda tu logo como logo.png en tu carpeta) -->
+            <img src="logo.png" alt="AV Fincas Logo" class="logo-img">
+            
+        </div>
+        <ul>
+            <li><a href="#sobre-mi">Perfil</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#inmuebles">Cartera</a></li>
+           <li><a href="#vision">Compromiso</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- SOBRE MÍ / HERO -->
+    <section id="sobre-mi" class="hero fade-in-section">
+        <div class="hero-text">
+            <h2>Asesora inmobiliaria</h2>
+            <h1>Proteger lo que de verdad importa</h1>
+            <h3>Sandra Ballester</h3>
+                <p>Detrás de cada propiedad hay una historia y, sobre todo, el futuro de una familia. En AV Fincas entendemos que nuestro trabajo no consiste en acumular transacciones, sino en ayudar a las personas a abrir nuevas etapas con total tranquilidad. Mi objetivo es guiarles con claridad a la hora de comprar o vender su vivienda, resolver toda la complejidad del proceso y asegurar que cada decisión que tomen sea sobre terreno firme.</p>
+        </div>
+        <div class="hero-img-wrapper">
+            <!-- 2. TU FOTO DE PERFIL (Guarda tu foto como perfil.jpg en tu carpeta) -->
+            <img src="Sandra.jpg" alt="Tu Foto Profesional">
+        </div>
+    </section>
+
+    <div class="panel-separador-premium">
+        <div class="pista-metalica">
+            <div class="curva-central"></div>
+        </div>
+    </div>
+
+
+    <!-- SERVICIOS -->
+    <section id="servicios" class="servicios espaciado fade-in-section">
+        <div class="section-header">
+            <h2>Servicios Especializados</h2>
+        </div>
+        
+        <div class="grid-servicios">
+            <div class="s-card">
+                <span class="num">01 /</span>
+                <h3>Asesoría de Venta</h3>
+                <p style="text-align: justify !important;"> Acompañamos a las familias en todo el proceso de venta de su vivienda. Desde la valoración real hasta la difusión discreta, gestionamos las visitas con filtros de seguridad y resolvemos la complejidad técnica para asegurar una transacción ágil, transparente y sin sorpresas.</p>
+            </div>
+
+            <div class="s-card">
+                <span class="num">02 /</span>
+                <h3>Personal Shopper</h3>
+                <p style="text-align: justify !important;">Encontramos la casa que su familia necesita, protegiendo siempre sus intereses. Rastreamos el mercado residencial (incluyendo opciones off-market), analizamos el estado técnico de la finca y negociamos el precio real para que compren con total seguridad.</p>
+            </div>
+
+            <div class="s-card">
+                <span class="num">03 /</span>
+                <h3>Cambio de Hogar</h3>
+                <p style="text-align: justify !important;">Coordinamos la compleja transición de vender su propiedad actual para adquirir la siguiente. Diseñamos una estrategia de tiempos y financiera a medida para que el salto de una vivienda a otra sea fluido, libre de estrés y completamente seguro.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CARTERA DE INMUEBLES -->
+    <section id="inmuebles" class="inmuebles espaciado fade-in-section">
+        <div class="section-header">
+            <span>Selección</span>
+            <h2>Cartera Gestionada</h2>
+        </div>
+
+        <div class="slider-wrapper">
+            <div class="slider" id="inmuebles-slider">
+                
+                <!-- INMUEBLE 1: CASA MAS ALBA -->
+                <a href="https://www.avfincas.com/propiedad/espectacular-casa-de-obra-nueva-con-piscina-y-parcela-doble-en-mas-alba-29008006/" target="_blank" style="text-decoration: none; color: inherit;">
+                    <div class="i-card">
+                        <div class="i-img-box">
+                            <img src="Mas Alba.jpeg" alt="Propiedad">
+                        </div>
+                        <h3>CASA DE OBRA NUEVA CON PISCINA</h3>
+                        <p>Sant Pere de Ribes, España</p>
+                        <div class="price">1.300.000 €</div>
+                    </div>
+                </a>
+                
+                <!-- INMUEBLE 2: LOCAL BALMES / VIA AUGUSTA -->
+                <a href="https://www.avfincas.com/propiedad/local-en-venta-en-calle-daribau-con-via-augusta-muy-cerca-del-mercado-de--galvany-barcelona-26030825/" target="_blank" style="text-decoration: none; color: inherit;">
+                    <div class="i-card">
+                        <div class="i-img-box">
+                            <img src="Local Putxet .jpg" alt="Propiedad">
+                        </div>
+                        <h3>LOCAL EN EL PUTXET I EL FARRÓ</h3>
+                        <p>Barcelona, España</p>
+                        <div class="price">1.150.000 €</div>
+                    </div>
+                </a>
+
+                <!-- INMUEBLE 3: ÁTICO NOVA ESQUERRA -->
+                <a href="https://www.avfincas.com/propiedad/exclusivo-atico-reformado-con-terraza-en-la-nova-esquerra-de-lreixample-29089684/" target="_blank" style="text-decoration: none; color: inherit;">
+                    <div class="i-card">
+                        <div class="i-img-box">
+                            <img src="Ático.jpg" alt="Propiedad">
+                        </div>
+                        <h3>ÁTICO EN LA NOVA ESQUERRA DE L’EIXAMPLE</h3>
+                        <p>Barcelona, España</p>
+                        <div class="price">875.000 €</div>
+                    </div>
+                </a>
+                 <!-- INMUEBLE 4: PISO EIXAMPLE -->
+                <a href="https://www.avfincas.com/propiedad/exclusivo-piso-reformado-en-el-corazon-del-eixample-28786498/" target="_blank" style="text-decoration: none; color: inherit;">
+                    <div class="i-card">
+                        <div class="i-img-box">
+                            <img src="Sant Antoni.jpg" alt="Propiedad">
+                        </div>
+                        <h3>PISO REFORMADO EN SANT ANTONI</h3>
+                        <p>Barcelona, España</p>
+                        <div class="price">895.000 €</div>
+                    </div>
+                </a>
+                <!-- INMUEBLE 5: PISO L'ESQUERRA -->
+                <a href="https://www.avfincas.com/propiedad/piso-en-venta-reformado-con-balcon-en-lesquerra-de-leixample-28976756/" target="_blank" style="text-decoration: none; color: inherit;">
+                    <div class="i-card">
+                        <div class="i-img-box">
+                            <img src="piso esquerra.jpg" alt="Propiedad">
+                        </div>
+                        <h3>PISO REFORMADO CON BALCÓN EN L'ESQUERRA DE L'EIXAMPLE</h3>
+                        <p>Barcelona, España</p>
+                        <div class="price">630.000 €</div>
+                    </div>
+                </a>
+
+            </div> <!-- Cierre correcto de .slider -->
+            
+            <div class="controls">
+                <button class="btn-slide" onclick="scrollSlider('inmuebles-slider', -1)">&#8592;</button> 
+                <button class="btn-slide" onclick="scrollSlider('inmuebles-slider', 1)">&#8594;</button>
+            </div>
+        </div> <!-- Cierre correcto de .slider-wrapper -->
+    </section>
+
+    <!-- OPINIONES / RESEÑAS -->
+<section id="vision" class="fade-in-section">
+    <div class="vision-title">
+        
+        <h2>Compromiso</h2>
+    </div>
+    
+    <div class="grid-vision">
+        <div class="tarjeta-desplegable" onclick="this.classList.toggle('active')">
+            <h3>Análisis Riguroso</h3>
+            <p class="detalle">Baso mis consejos en datos reales de mercado, analizando cada variable para garantizar el valor óptimo de tus activos y asegurar que tu inversión esté siempre protegida por criterios técnicos impecables.</p>
+        </div>
+        
+        <div class="tarjeta-desplegable" onclick="this.classList.toggle('active')">
+            <h3>Defensa de Intereses</h3>
+            <p class="detalle">Tu patrimonio es mi prioridad. Negocio cada detalle técnico y legal con la máxima firmeza, actuando siempre bajo la premisa de proteger tus intereses por encima de cualquier otra consideración.</p>
+        </div>
+        
+        <div class="tarjeta-desplegable" onclick="this.classList.toggle('active')">
+            <h3>Gestión Integral</h3>
+            <p class="detalle">Desde la valoración inicial hasta la firma en notaría, me encargo de todo el proceso. Te libero de la carga operativa y la incertidumbre para que tú solo tengas que tomar las decisiones importantes.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACTO / FOOTER DE INMEDIATEZ -->
+    <footer id="contacto">
+        <div class="container-contacto">
+            
+            <div class="contacto-pro">
+                <h2>¿Puedo ayudarte?</h2>
+                
+                <a href="https://wa.me/34602250501" target="_blank" class="btn-whatsapp-directo">
+                    Contactar por WhatsApp <span class="flecha">→</span>
+                </a>
+
+                
+            </div>
+
+            <div class="contacto-info">
+                <div class="info-block">
+                    <h3>Atención al Público</h3>
+                    <p>Lunes a Viernes — 09:30h a 19:00h</p>
+                </div>
+                
+                <div class="info-block">
+                    <h3>Asesoría Residencial</h3>
+                    <p>Especialistas en la compraventa de viviendas</p>
+                </div>
+
+                <div class="info-block">
+                    <h3>Oficina</h3>
+                    <p>C/ Londres 88, Barcelona</p>
+                </div>
+                <div class="mapa-contenedor">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2993.447953258814!2d2.146522576579624!3d41.386088896041695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a2842004bb1b%3A0xc367129f129a674d!2sC%2F%20de%20Londres%2C%2088%2C%20L&#39;Eixample%2C%2008036%20Barcelona!5e0!3m2!1ses!2ses!4v1716024000000!5m2!1ses!2ses" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- FRANJA DE COLOR CON DATOS Y COPYRIGHT CENTRADO -->
+        <div class="franja-corporativa">
+            
+            <div class="footer-copyright">
+                AV Fincas © 2026 — Todos los derechos reservados
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT DE DESPLAZAMIENTO FLUIDO -->
+    <script>
+        // 1. Lógica de las flechas
+        function scrollSlider(id, direction) {
+            const slider = document.getElementById(id);
+            // Calculamos el ancho de una tarjeta + el gap (40px)
+            const cardWidth = slider.querySelector('.i-card, .r-card').offsetWidth + 40; 
+            slider.scrollBy({ left: cardWidth * direction, behavior: 'smooth' });
+        }
+
+        // 2. Lógica del efecto Fade-in (IntersectionObserver)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Seleccionamos todas las secciones con fade-in-section
+        document.querySelectorAll('.fade-in-section').forEach((section) => {
+            observer.observe(section);
+        });
+    </script>
+    
+</body>
+</html>
