@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AV Fincas — Portfolio Inmobiliario</title>
+    
+    <!-- Tipografía Lato -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;900&display=swap" rel="stylesheet">
+    
+    <style>
+    @keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+    :root {
+            --corp: #5c768b; /* Azul grisáceo AV Fincas */
+            --dark: #121212; /* Negro puro para contraste radical */
+            --bg: #f9f9f9;   /* Fondo roto, estilo galería de arte */
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Lato', sans-serif; scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--dark); overflow-x: hidden; }
+        
+        /* HEADER REINVENTADO: LOGO GRANDE Y MENÚ PERFECTAMENTE ALINEADOS */
+        nav {
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; /* Alinea verticalmente el logo y los textos al centro perfecto */
+            padding: 25px 5%; 
+            background: rgba(249, 249, 249, 0.95); /* Fondo sutil con transparencia estilo galería */
+            backdrop-filter: blur(10px);
+            position: fixed; /* Se queda fijo arriba al hacer scroll sin romper nada */
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        /* Contenedor del Logo */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 18px; /* Un poco más de espacio */
+        }
+        .logo-img {
+            height: 60px; /* Resalta mucho más */
+            width: auto;
+            object-fit: contain;
+        }
+        .logo-texto { 
+            font-weight: 900; 
+            font-size: 1.5rem; /* Letra ligeramente más grande para acompañar */
+            letter-spacing: 2px; 
+            color: var(--dark); 
+            text-transform: uppercase; 
+            line-height: 1;
+        }
+        .logo-texto span { font-weight: 300; color: var(--corp); }
+
+        /* El Menú de Enlaces Estilizado */
+        nav ul { 
+            display: flex; 
+            list-style: none; 
+            gap: 40px; 
+            align-items: center; /* Asegura que las letras del menú se alineen con el centro del logo */
+        }
+        nav ul a { 
+            text-decoration: none; 
+            color: var(--dark); 
+            font-weight: 400; 
+            font-size: 0.85rem; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            transition: color 0.3s ease; 
+        }
+        nav ul a:hover { 
+            color: var(--corp); /* Tu azul grisáceo al pasar el ratón */
+        }
+
+        /* HERO / SOBRE MÍ - UNIFICADO Y CORREGIDO (Sin hueco en blanco) */
+        /* CORRECCIÓN DEL HERO PARA QUE QUEDE EN PARALELO */
+        .hero {
+    padding: 160px 5% 60px 5% !important; 
+    display: grid !important; 
+    grid-template-columns: 1.2fr 1fr !important; 
+    align-items: center !important; 
+    gap: 100px !important;
+padding-top: 220px !important;
+padding-bottom: 180px !important;
+    background:
+        radial-gradient(circle at top left, rgba(92,118,139,0.08), transparent 40%),
+        radial-gradient(circle at bottom right, rgba(92,118,139,0.05), transparent 35%),
+        var(--bg) !important;
+
+    min-height: auto !important;
+}
+        
+        
+        .hero-text { padding-right: 40px; }
+        .hero-text h2 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 6px; color: var(--corp); margin-bottom: 20px; font-weight: 400; }
+        .hero-text h1 { font-size: 5.5rem; font-weight: 900; line-height: 0.95; color: var(--dark); letter-spacing: -2px; margin-bottom: 40px; }
+        
+        /* JUSTIFICADO DE TEXTO SEGURO */
+        .hero-text p { 
+            font-size: 1.2rem; 
+            font-weight: 300; 
+            line-height: 1.8; 
+            color: #555; 
+            max-width: 500px; 
+            text-align: justify !important; 
+            text-justify: inter-word;
+        }
+
+        /* CONTENEDOR DE LA FOTO (MÁS PEQUEÑO Y ESTILIZADO) */
+        .hero-img-wrapper { 
+            position: relative; 
+            width: 100%;           /* Reducido al 80% para que sea más pequeña */
+            height: 620px;        /* Altura más baja para encuadrar mejor */
+            margin: 0 auto;       /* Centrada elegantemente en su columna */
+            overflow: hidden; 
+            border-radius: 4px; 
+        }
+
+        /* LA FOTO TRATADA COMO ARTE (NUNCA SE PIXELA NI SE RECORTA) */
+        .hero-img-wrapper img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain;  /* CLAVE: Muestra la foto ENTERA sin recortar ni una esquina */
+            object-position: center;
+            image-rendering: -webkit-optimize-contrast; /* Fuerza al navegador a enfocar y dar nitidez */
+            transition: transform 0.7s ease; 
+        }
+        
+.hero-img-wrapper { 
+    position: relative; 
+    background: #f9f9f9; /* Debe ser IGUAL al --bg de tu CSS */
+    border-radius: 4px; 
+}
+.hero-img-wrapper img { 
+    mix-blend-mode: multiply; /* Esto ayuda a que el blanco de la foto "desaparezca" si la foto es un JPG con fondo blanco */
+}
+ /* --- SECCIÓN SERVICIOS: CÓDIGO ÚNICO Y ESTABLE --- */
+
+/* Estilo Premium para Servicios */
+.servicios { 
+    padding: 120px 5% !important; 
+    background: #1a1f26 !important; /* Fondo oscuro elegante */
+}
+
+.grid-servicios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
+}
+
+.card-servicio {
+    padding: 50px 40px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.card-servicio:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--corp);
+    transform: translateY(-12px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.card-servicio .num {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    color: var(--corp);
+    margin-bottom: 25px;
+    font-weight: 900;
+}
+
+.card-servicio h3 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+    line-height: 1.1;
+}
+
+.card-servicio p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #a0a0a0;
+    font-weight: 300;
+}
+
+/* Título de la sección (Asegurado) */
+.section-header { margin-bottom: 80px; }
+.section-header span { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; color: var(--corp); display: block; }
+.section-header h2 { font-size: 3.5rem; font-weight: 900; letter-spacing: -1px; margin-top: 10px; color: #ffffff; }
+
+.grid-servicios { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 60px; 
+    align-items: start;
+}
+
+.s-card { 
+    border-top: 1px solid rgba(255, 255, 255, 0.2) !important; 
+    padding-top: 30px; 
+    position: relative; 
+    cursor: pointer;
+    box-shadow: none !important;
+    transform: none !important; 
+    transition: border-color 0.3s ease, color 0.3s ease !important;
+    
+    /* BLOQUEO DE VIBRACIONES */
+    
+    -webkit-font-smoothing: antialiased;
+    
+}
+
+.s-card:hover {
+    border-color: var(--corp);
+    background: rgba(255,255,255,0.06);
+}
+
+
+.s-card .num { 
+    font-size: 0.8rem; 
+    font-weight: 900; 
+    color: var(--corp); 
+    display: block; 
+    margin-bottom: 20px; 
+    transition: color 0.3s ease;
+}
+
+.s-card h3 { 
+    font-size: 1.8rem; 
+    font-weight: 900; 
+    margin-bottom: 15px; 
+    letter-spacing: -0.5px; 
+    color: #ffffff;
+    transition: color 0.3s ease;
+}
+
+.s-card p { 
+    font-size: 1rem; 
+    color: #cccccc; 
+    font-weight: 300; 
+    line-height: 1.6; 
+}
+
+/* Efectos Hover (Sin movimiento) */
+.s-card:hover .num { color: #ffffff !important; }
+.s-card:hover h3 { color: var(--corp) !important; }
+        /* SECCIÓN: CARTERA DE INMUEBLES */
+        .inmuebles { padding: 120px 0 120px 5%; background: var(--dark); color: var(--white); position: relative; }
+        .inmuebles .section-header h2 { color: var(--white); }
+        
+        .slider-wrapper { position: relative; margin-top: 60px; padding-right: 5%; }
+        .slider { display: flex; overflow-x: auto; gap: 40px; padding-bottom: 30px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+        .slider::-webkit-scrollbar { display: none; }
+        
+        .i-card { min-width: 450px; scroll-snap-align: start; cursor: pointer; }
+        .i-img-box { width: 100%; height: 500px; overflow: hidden; margin-bottom: 20px; background: #222; border-radius: 4px; }
+       .i-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    transition:
+        transform 1s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.8s ease;
+}
+
+.i-card:hover .i-img-box img {
+    transform: scale(1.08);
+    filter: brightness(1.05);
+}
+        .i-card h3 { font-size: 1.5rem; font-weight: 400; margin-bottom: 5px; }
+        .i-card p { font-size: 0.9rem; color: #888; font-weight: 300; text-transform: uppercase; letter-spacing: 1px; }
+        .i-card .price { font-size: 1.4rem; font-weight: 900; color: var(--corp); margin-top: 10px; }
+
+        /* SECCIÓN: OPINIONES */
+        .resenas { padding: 120px 5%; background: var(--bg); }
+        .slider-resenas { display: flex; overflow-x: auto; gap: 60px; scrollbar-width: none; margin-top: 60px; }
+        .slider-resenas::-webkit-scrollbar { display: none; }
+        .r-card { min-width: 500px; }
+        .r-card p { font-size: 2rem; font-weight: 300; line-height: 1.5; color: var(--dark); margin-bottom: 30px; letter-spacing: -0.5px; }
+        .r-card h4 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; color: var(--corp); }
+
+        /* CONTROLES DE LOS SLIDERS */
+        .controls { display: flex; gap: 15px; margin-top: 30px; }
+        .btn-slide { 
+            background: transparent; border: 1px solid rgba(255,255,255,0.2); color: var(--white); 
+            width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; 
+            justify-content: center; align-items: center; font-size: 1.2rem; transition: 0.3s;
+        }
+        .resenas .btn-slide { border-color: rgba(0,0,0,0.1); color: var(--dark); }
+        .btn-slide:hover { background: var(--corp); border-color: var(--corp); color: var(--white); }
+
+        /* SECCIÓN CONTACTO DIRECTO - EQUILIBRADA */
+        footer { 
+            padding: 140px 5% 0 5%; 
+            background: var(--white); 
+            border-top: 1px solid #eee; 
+        }
+        
+        footer .container-contacto {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+
+    margin-top: 60px;
+    margin-bottom: 120px;
+
+    align-items: start;
+}
+
+        /* Columna Izquierda */
+        .contacto-pro {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .contacto-pro h2 {
+            font-size: 3.8rem;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            color: var(--dark);
+            margin: 0;
+        }
+        .contacto-pro h2 span {
+            color: var(--corp);
+        }
+
+        /* Botón de WhatsApp */
+        .btn-whatsapp-directo {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--dark);
+            color: var(--white);
+            text-decoration: none;
+            padding: 20px 40px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 900;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            align-self: flex-start;
+        }
+        .btn-whatsapp-directo:hover {
+            background: var(--corp);
+            box-shadow: 0 10px 30px rgba(92, 118, 139, 0.2);
+        }
+        .btn-whatsapp-directo .flecha {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        .btn-whatsapp-directo:hover .flecha {
+            transform: translateX(5px);
+        }
+
+        /* MAPA PERFECTAMENTE INTEGRADO A LA IZQUIERDA */
+        .mapa-contenedor {
+            width: 100%;
+            height: 280px;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid #eee;
+            filter: grayscale(100%) contrast(90%);
+            transition: filter 0.5s ease;
+        }
+        .mapa-contenedor:hover {
+            filter: grayscale(0%) contrast(100%);
+        }
+        .mapa-contenedor iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Columna Derecha: Canales Directos e Información */
+        .contacto-info {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            padding-left: 60px;
+            border-left: 1px solid #eee;
+        }
+        .info-block h3 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--corp);
+            margin-bottom: 8px;
+            font-weight: 900;
+        }
+        .info-block p, .info-block a {
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: var(--dark);
+            text-decoration: none;
+            line-height: 1.4;
+        }
+
+        /* FRANJA CORPORATIVA INFERIOR (Mantiene el Copyright centrado) */
+       .franja-corporativa {
+    width: 100vw;
+
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background: var(--corp);
+    color: var(--white);
+
+    padding: 40px 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    margin: 0;
+}
+        .franja-datos {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+        .dato-item {
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            font-weight: 300;
+        }
+        .dato-item strong {
+            font-weight: 900;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .footer-copyright {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
+        /* RESPONSIVE Y ADAPTABILIDAD GENERAL */
+        @media (max-width: 968px) {
+            .hero { grid-template-columns: 1fr; padding-top: 140px; padding-bottom: 40px; gap: 40px; }
+            .hero-text h1 { font-size: 3.5rem; }
+            .hero-text { padding-right: 0; }
+            .hero-img-wrapper { height: 450px; width: 100%; }
+            .servicios { padding-top: 60px; }
+            .i-card { min-width: 300px; }
+            .i-img-box { height: 350px; }
+            .r-card { min-width: 100%; }
+            .r-card p { font-size: 1.4rem; }
+            
+            footer { padding-top: 80px; }
+            footer .container-contacto { grid-template-columns: 1fr; gap: 50px; margin-bottom: 60px; }
+            .contacto-pro h2 { font-size: 2.6rem; }
+            .btn-whatsapp-directo { width: 100%; justify-content: center; }
+            .contacto-info { padding-left: 0; border-left: none; gap: 30px; }
+            .info-block p, .info-block a { font-size: 1.2rem; }
+            .mapa-contenedor { height: 220px; }
+            
+            .franja-corporativa {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                margin-left: -6%;
+                margin-right: -6%;
+                gap: 25px;
+            }
+            .franja-datos { flex-direction: column; align-items: center; gap: 15px; }
+            .footer-copyright { white-space: normal; }
+        }
+      /* ==========================================================================
+   PANEL DE TRANSICIÓN PREMIUM (ESTILO IMAGEN)
+   ========================================================================== */
+/* Tarjetas estáticas y sólidas como una roca */
+        .s-card { 
+            border-top: 1px solid rgba(255, 255, 255, 0.2) !important; 
+            padding-top: 30px; 
+            position: relative; 
+            box-shadow: none !important; 
+            transform: none !important; 
+            transition: none !important; /* ELIMINAMOS TODA TRANSICIÓN */
+            /* Mantenemos la estructura fija */
+    
+            -webkit-font-smoothing: subpixel-antialiased; /* Esto evita el baile de píxeles */
+        }
+
+        /* Cuando pasas el ratón: Solo cambiamos colores, nada que mueva un píxel */
+        .s-card:hover {
+            border-top: 1px solid var(--corp) !important;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        
+           
+        
+/* --- RECUPERACIÓN TÍTULO CASOS DE ÉXITO --- */
+.resenas .section-header { 
+    margin-bottom: 60px; 
+    display: block !important; /* Asegura que sea visible */
+}
+
+.resenas .section-header span { 
+    font-size: 0.8rem; 
+    text-transform: uppercase; 
+    letter-spacing: 4px; 
+    color: var(--corp); 
+    display: block; 
+}
+
+.resenas .section-header h2 { 
+    font-size: 3.5rem; 
+    font-weight: 900; 
+    letter-spacing: -1px; 
+    margin-top: 10px; 
+    color: var(--dark); /* Color oscuro para el fondo claro */
+}
+/* Eliminar cualquier margen extraño entre bloques */
+.hero { margin-bottom: 0 !important; padding-bottom: 60px !important; }
+.panel-separador-premium { 
+    width: 100%; 
+    background: var(--bg); 
+    position: relative; 
+    z-index: 5; 
+   margin-top: -120px; /* Aumentamos el valor negativo para "subir" el panel y pegar las secciones */
+    margin-bottom: -40px; /* Esto ayuda a que el bloque inferior se pegue mejor */
+}
+/* --- BLOQUE DE ESPACIADO PROFESIONAL Y DEFINITIVO --- */
+
+/* 1. Limpieza de secciones: Igualamos todas para que tengan el mismo "aire" */
+#sobre-mi, .servicios, .inmuebles, .resenas {
+    padding: 100px 5% !important; 
+    margin: 0 !important;
+}
+
+/* 2. Ajuste específico para que el Hero empiece bien tras el menú fijo */
+#sobre-mi { padding-top: 180px !important; }
+
+/* 3. Panel separador: Lo liberamos de márgenes negativos que lo deformaban */
+.panel-separador-premium { 
+    width: 100%; 
+    background: var(--bg); 
+    position: relative; 
+    z-index: 5; 
+    margin: 0 !important; 
+    padding: 20px 0 !important; /* Espacio ligero pero visible */
+}
+
+/* 4. Footer: Necesita su propio espacio superior */
+footer { 
+    padding-top: 100px !important; 
+    background: var(--white); 
+}
+
+/* 5. Asegurar que no haya secciones vacías creando huecos */
+section:empty { display: none !important; }
+.servicios { margin-top: 0 !important; padding-top: 80px !important; }
+    /* Franja de acento superior */
+.top-accent-bar {
+    width: 100%;
+    height: 6px;
+    background: var(--corp);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999; /* Por encima de todo */
+}
+/* Limpieza total de márgenes conflictivos */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* AÑADE ESTO: Clase para separar secciones a tu gusto */
+.espaciado {
+    padding-top: 100px !important;
+    padding-bottom: 100px !important;
+}
+
+/* Ajustes básicos para evitar pantalla blanca */
+html, body { width: 100%; height: auto; overflow-x: hidden; }
+    /* 1. SISTEMA DE ESPACIADO GRANDE Y DEFINITIVO */
+/* Aplicamos padding de 200px arriba y abajo a todas las secciones principales */
+section, #sobre-mi, .servicios, .inmuebles, .resenas {
+    padding-top: 200px !important;
+    padding-bottom: 200px !important;
+    margin: 0 !important;
+}
+
+/* 2. Ajuste específico para el Hero para no perder su alineación tras el menú */
+#sobre-mi { 
+    padding-top: 250px !important; /* Más espacio bajo el menú fijo */
+    padding-bottom: 200px !important; 
+}
+
+/* 3. Footer: Le damos un respiro amplio */
+footer { 
+    padding-top: 200px !important; 
+    padding-bottom: 100px !important;
+}
+
+/* 4. Panel separador: Si lo mantienes, que tenga su propio aire */
+.panel-separador-premium { 
+    padding: 100px 0 !important; 
+}
+/* Aplicamos la animación a todas tus secciones principales */
+
+/* 1. Forzar tipografía Lato en esta sección */
+#metodologia, #metodologia * {
+    font-family: 'Lato', sans-serif !important;
+}
+
+/* 2. Definición de la animación de entrada */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 3. Aplicar animación a las tarjetas */
+#metodologia .r-card {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+/* 4. Retraso escalonado (efecto premium) */
+#metodologia .r-card:nth-child(1) { animation-delay: 0.2s; }
+#metodologia .r-card:nth-child(2) { animation-delay: 0.4s; }
+#metodologia .r-card:nth-child(3) { animation-delay: 0.6s; }
+
+/* 5. Asegurar que las tarjetas sean consistentes */
+.r-card {
+    transition: transform 0.3s ease;
+}
+.r-card:hover {
+    transform: translateY(-5px); /* Un pequeño gesto al pasar el ratón */
+}
+.contenido-desplegable {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+}
+
+.r-card.active .contenido-desplegable {
+    max-height: 200px; /* Suficiente espacio para el texto */
+    opacity: 1;
+    margin-top: 20px;
+}
+
+.r-card { cursor: pointer; border-top: 4px solid var(--corp); background: #fff; padding: 40px; }
+
+.arrow { float: right; font-size: 0.8rem; transition: transform 0.3s; }
+.r-card.active .arrow { transform: rotate(180deg); }
+/* AJUSTES DE TIPOGRAFÍA Y LEGIBILIDAD */
+
+/* 1. Ajuste de títulos para que no sean tan grandes */
+.r-card h3 {
+    font-size: 1.1rem !important; /* Tamaño más contenido y profesional */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 2. Ajuste del texto del desplegable */
+.contenido-desplegable p {
+    font-size: 0.95rem !important; /* Tamaño estándar de lectura fácil */
+    line-height: 1.6 !important;
+    color: #555 !important;
+    margin-top: 15px;
+    text-align: justify;
+}
+
+/* 3. Asegurar que las tarjetas tengan altura automática (para que el texto no se corte) */
+.r-card {
+    height: auto !important; /* Permite que la tarjeta crezca según el contenido */
+    padding: 30px !important;
+    border-top: 4px solid var(--corp);
+    background: #fff;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+/* 4. Ajuste del contenedor del desplegable */
+.contenido-desplegable {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out, opacity 0.5s ease;
+}
+
+.r-card.active .contenido-desplegable {
+    max-height: 300px; /* Suficiente altura para que se lea todo el texto sin problemas */
+    opacity: 1;
+}
+/* Fondo blanco limpio para la sección */
+#metodologia {
+    background: #eef2f5 !important;
+}
+
+/* Tarjetas con el color corporativo de AV Fincas */
+.r-card {
+    background: #5c768b !important; /* Color azul AV Fincas */
+    color: #ffffff !important;      /* Texto en blanco para leer sobre el azul */
+    border-top: none !important;    /* Quitamos el borde superior */
+    border-radius: 4px;             /* Bordes suaves */
+    padding: 40px !important;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+/* Color de los títulos dentro de la tarjeta */
+.r-card h3 {
+    color: #ffffff !important;
+    font-size: 1.1rem !important;
+}
+
+/* Color del texto del desplegable */
+.contenido-desplegable p {
+    color: #e0e0e0 !important; /* Un gris muy claro para que se lea bien sobre el azul */
+    font-size: 0.95rem !important;
+}
+
+/* Efecto hover para interactividad */
+.r-card:hover {
+    background: #4a5f70 !important; /* Un tono un poco más oscuro al pasar el ratón */
+    transform: translateY(-5px);
+}
+/* Contenedor principal con efecto de foco */
+.grid-servicios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+    transition: all 0.5s ease;
+}
+
+/* Efecto al pasar el ratón por el contenedor padre */
+.grid-servicios:hover .s-card:not(:hover) {
+    opacity: 0.3; /* Las tarjetas que no tocas se vuelven transparentes */
+    filter: blur(2px); /* Un sutil efecto de profundidad */
+}
+
+/* Tarjetas individuales */
+.s-card {
+    border-top: 1px solid var(--corp) !important;
+    padding-top: 30px;
+    transition: all 0.3s ease !important; /* Transición suave */
+    cursor: default;
+}
+/* ==========================================
+   ESPECIALIDAD — ESTILO PREMIUM
+========================================== */
+
+#especialidad {
+    padding: 140px 5%;
+    background: #1f2732;
+    color: var(--white);
+    overflow: hidden;
+}
+
+/* GRID */
+.especialidad-grid {
+    display: grid;
+
+    grid-template-columns: 1.1fr 1fr;
+
+    gap: 100px;
+
+    align-items: center;
+}
+
+/* TEXTO */
+.especialidad-texto p {
+    margin-bottom: 45px;
+
+    line-height: 2;
+
+    color: rgba(255,255,255,0.75);
+
+    font-size: 1.05rem;
+
+    max-width: 580px;
+}
+
+/* LISTA */
+.especialidad-texto ul {
+    list-style: none;
+}
+
+.especialidad-texto ul li {
+    padding: 22px 0;
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.08);
+
+    font-size: 1.05rem;
+
+    color: #ffffff;
+
+    transition:
+        padding-left 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+/* HOVER */
+.especialidad-texto ul li:hover {
+    padding-left: 12px;
+
+    color: var(--corp);
+
+    border-color: var(--corp);
+
+    cursor: pointer;
+}
+
+/* IMAGEN */
+.especialidad-imagen {
+    position: relative;
+}
+
+.especialidad-imagen img {
+    width: 100%;
+
+    height: 620px;
+
+    object-fit: cover;
+
+    border-radius: 4px;
+
+    transition:
+        transform 0.7s ease,
+        filter 0.7s ease;
+}
+
+/* HOVER IMAGEN */
+.especialidad-imagen:hover img {
+    transform: scale(1.015);
+
+    filter: brightness(1.05);
+}
+/* Estilo unificado para todos los títulos de sección */
+.section-title {
+    font-size: 3rem;       /* Ajusta si el de Servicios es distinto */
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 60px;
+    color: var(--dark);
+    text-align: center;    /* O left, según cómo tengas el de Servicios */
+}
+.section-title {
+    font-size: 3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 60px;
+    color: var(--white); /* Título en blanco */
+    text-align: left;    /* Alineado a la izquierda */
+    padding-left: 5%;    /* Esto lo alinea con el margen de tus otras secciones */
+}
+/* Aseguramos que la sección entera respete el margen */
+#especialidad {
+    padding: 100px 0; /* Quitamos padding lateral aquí para controlarlo en los hijos */
+    background: #1c232e;
+    color: var(--white);
+}
+
+/* Aplicamos el margen del 5% a todo lo que está dentro */
+.especialidad-header, .especialidad-grid {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.section-title {
+    font-size: 3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 60px;
+    color: var(--white);
+    text-align: left;
+}
+
+/* Alineación del texto dentro de la cuadrícula */
+.especialidad-texto {
+    padding-right: 20px; /* Para que no toque el borde en pantallas pequeñas */
+}
+/* Corrección: Alineación absoluta a la izquierda */
+#especialidad {
+    padding: 100px 5% !important; /* El 5% es el margen izquierdo */
+    background: #1c232e;
+    color: var(--white);
+    text-align: left; /* Fuerza a que todo el texto sea izquierdo */
+}
+
+.especialidad-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    text-align: left; /* Asegura que la cuadrícula también sea izquierda */
+    margin: 0;
+}
+
+.section-title {
+    font-size: 3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--white);
+    text-align: left; /* Alineado a la izquierda */
+    margin-bottom: 40px;
+    padding-left: 0; /* Quitamos el padding extra para que toque el margen del 5% */
+}
+
+.especialidad-texto p, .especialidad-texto ul {
+    text-align: left; /* Fuerza el párrafo y la lista a la izquierda */
+    margin-left: 0;
+}
+/* METODOLOGÍA - ESTILO PROFESIONAL */
+#metodologia { 
+    padding: 120px 5%; 
+    background:   #243241 !important;
+    #metodologia h2,
+#metodologia h3,
+#metodologia p {
+    color: #ffffff;
+}
+}
+
+.metodologia-header { margin-bottom: 60px; }
+.metodologia-header h2 { font-size: 3.5rem; font-weight: 900; color: var(--dark); }
+
+.metodologia-grid { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas iguales */
+    gap: 30px; 
+}
+
+.m-card { 
+    padding: 40px; 
+    border: 1px solid #eee; 
+    transition: all 0.3s ease; 
+    background: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+}
+
+
+.m-card:hover { 
+    border-color: var(--corp); 
+    transform: translateY(-10px); 
+}
+
+.m-card .numero { 
+    font-size: 2.5rem; 
+    font-weight: 900; 
+    color: var(--corp); 
+    margin-bottom: 20px; 
+    display: block; 
+}
+
+.m-card h3 { font-size: 1.4rem; margin-bottom: 15px; color: var(--dark); }
+.m-card p { font-size: 1rem; color: #555; line-height: 1.6; }
+
+/* Adaptación móvil */
+@media (max-width: 968px) {
+    .metodologia-grid { grid-template-columns: 1fr; }
+}
+/* Ajuste perfecto del anclaje del menú */
+section {
+    scroll-margin-top: 120px;
+}
+#contacto {
+    scroll-margin-top: -100px;
+}
+/* METODOLOGÍA OSCURA */
+#metodologia {
+    background: #243241 !important;
+}
+
+/* Título y subtítulo */
+#metodologia .metodologia-header h2,
+#metodologia .metodologia-header p {
+    color: #ffffff !important;
+}
+
+/* Tarjetas */
+#metodologia .m-card {
+    background: rgba(255,255,255,0.04) !important;
+
+    border: 1px solid rgba(255,255,255,0.08) !important;
+
+    border-radius: 4px;
+
+    padding: 40px;
+}
+
+/* Textos internos */
+#metodologia .m-card h3,
+#metodologia .m-card p {
+    color: #ffffff !important;
+}
+
+/* Número */
+#metodologia .m-card .numero {
+    color: var(--corp) !important;
+}
+
+/* Hover */
+#metodologia .m-card:hover {
+    transform: translateY(-10px);
+
+     border-color: var(--corp) !important;
+    background: rgba(255,255,255,0.08) !important;
+}
+/* Fade-in moderno y estable */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(30px);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+html {
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+/* ANIMACIÓN FADE-IN */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(40px);
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* Efecto suave de imagen perfil */
+.hero-img-wrapper img {
+    transition: transform 0.6s ease;
+}
+
+.hero-img-wrapper:hover img {
+    transform: scale(1.015);
+}
+.grid-servicios {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(320px, 1fr));
+
+    gap: 70px;
+}
+@media (max-width: 968px) {
+
+    #especialidad {
+        padding: 100px 5%;
+    }
+
+    .especialidad-grid {
+        grid-template-columns: 1fr;
+
+        gap: 60px;
+    }
+
+    .especialidad-imagen img {
+        height: 420px;
+    }
+
+    /* =========================================================
+   ANIMACIÓN PREMIUM DE ENTRADA POR SECCIONES
+========================================================= */
+
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(60px);
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+
+    will-change: opacity, transform;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.s-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left,
+        rgba(255,255,255,0.08),
+        transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.s-card:hover::before {
+    opacity: 1;
+}
+body {
+    cursor: default;
+}
+
+a, button, .s-card, .r-card, .i-card {
+    cursor: pointer;
+}
+.s-card {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: cardReveal 0.8s ease forwards;
+}
+
+.s-card:nth-child(1) { animation-delay: 0.2s; }
+.s-card:nth-child(2) { animation-delay: 0.4s; }
+.s-card:nth-child(3) { animation-delay: 0.6s; }
+}
+@keyframes cardReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(92,118,139,0.05), transparent 25%),
+      radial-gradient(circle at 80% 70%, rgba(92,118,139,0.04), transparent 30%);
+    pointer-events: none;
+    z-index: -1;
+}
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(92,118,139,0.12), transparent 30%),
+      radial-gradient(circle at 80% 70%, rgba(92,118,139,0.10), transparent 35%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+    </style>
+</head>
+<body>
+<div class="top-accent-bar"></div>
+    <nav>
+        <div class="logo-container">
+            <!-- 1. LOGO DE LA EMPRESA (Guarda tu logo como logo.png en tu carpeta) -->
+            <img src="logo.png" alt="AV Fincas Logo" class="logo-img">
+            
+        </div>
+        <ul>
+            <li><a href="#sobre-mi">Perfil</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#especialidad">Especialidad</a></li>
+           <li><a href="#metodologia">Metodología</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- SOBRE MÍ / HERO -->
+    <section id="sobre-mi" class="hero fade-in-section">
+        <div class="hero-text">
+            <h2>Asesora fiscal</h2>
+            <h1>Proteger lo que de verdad importa</h1>
+            <h3>Chus Martín</h3>
+                <p>Como asesora fiscal en AV Fincas, mi objetivo es transformar la complejidad tributaria en soluciones claras. Con una trayectoria enfocada en el rigor normativo y la planificación estratégica, acompaño a particulares y empresas a optimizar su carga fiscal sin sobresaltos.</p>
+        </div>
+        <div class="hero-img-wrapper">
+            <!-- 2. TU FOTO DE PERFIL (Guarda tu foto como perfil.jpg en tu carpeta) -->
+            <img src="Chus.jpg" alt="Tu Foto Profesional">
+        </div>
+    </section>
+
+    <div class="panel-separador-premium">
+        <div class="pista-metalica">
+            <div class="curva-central"></div>
+        </div>
+    </div>
+
+
+    <!-- SERVICIOS -->
+    <section id="servicios" class="servicios espaciado fade-in-section">
+        <div class="section-header">
+              <h2>Soluciones a tu medida</h2>
+        </div>
+        
+        <div class="grid-servicios">
+            <div class="s-card">
+                <span class="num">01 /PATRIMONIO</span>
+                <h3>Gestión de IRPF y Patrimonio</h3>
+                <p style="text-align: justify !important;"> Optimización anual y planificación a largo plazo.</p>
+            </div>
+
+            <div class="s-card">
+                <span class="num">02 /FISCALIDAD</span>
+                <h3>Fiscalidad Inmobiliaria</h3>
+                <p style="text-align: justify !important;">Especialidad en operaciones de compraventa, plusvalías y rendimientos por alquiler.</p>
+               </div>
+
+            <div class="s-card">
+               <span class="num">03 /HERENCIA</span>
+                <h3>Sucesiones y Donaciones</h3>
+                <p style="text-align: justify !important;">Analizo oportunidades de mercado, gestiono proyectos de reforma y reposicionamiento. No solo encuentro inmuebles, diseño la estrategia para que cada euro invertido aumente el valor del patrimonio final.</p>
+            </div>
+
+            <div class="s-card">
+               <span class="num">04 /TRIBUTARIO</span>
+                <h3>Atención a requerimientos</h3>
+                <p style="text-align: justify !important;">Representación técnica y gestión frente a la Administración Tributaria.</p>
+              </div>
+        </div>
+    </section>
+
+    <!-- ESPECIALIDAD -->
+<section id="especialidad" class="fade-in-section">
+    <h2 class="section-title">Especialidad en el Sector Inmobiliario</h2>
+    
+    <div class="especialidad-grid">
+        <div class="especialidad-texto">
+            <p>Mi enfoque trasciende la fiscalidad básica. Entiendo que los activos inmobiliarios requieren una estrategia precisa para maximizar la rentabilidad y cumplir con todas las obligaciones legales.</p>
+            <ul>
+                <li>Optimización fiscal en la compraventa de viviendas.</li>
+                <li>Gestión eficiente de plusvalías y rendimientos por alquiler.</li>
+                <li>Planificación patrimonial para carteras inmobiliarias.</li>
+                <li>Cumplimiento normativo para propietarios e inversores.</li>
+            </ul>
+        </div>
+        
+        <div class="especialidad-imagen">
+            <img src="asesoria fiscal.png" alt="Asesoría Fiscal Especializada">
+        </div>
+    </div>
+</section>
+
+<!-- METODOLOGÍA -->
+   <section id="metodologia" class="fade-in-section">
+    <div class="metodologia-header">
+        <h2>Metodología</h2>
+        <p>Un sistema de trabajo diseñado para tu tranquilidad y cumplimiento fiscal.</p>
+    </div>
+
+    <div class="metodologia-grid">
+        <div class="m-card">
+            <span class="numero">01</span>
+            <h3>Diagnóstico</h3>
+            <p>Analizamos tu situación actual y detectamos oportunidades de ahorro o riesgos potenciales.</p>
+        </div>
+
+        <div class="m-card">
+            <span class="numero">02</span>
+            <h3>Planificación</h3>
+            <p>Diseñamos una hoja de ruta fiscal a medida, alineada con tus metas personales y patrimoniales.</p>
+        </div>
+
+        <div class="m-card">
+            <span class="numero">03</span>
+            <h3>Ejecución</h3>
+            <p>Gestionamos todas tus obligaciones fiscales con rigor, puntualidad y soporte técnico integral.</p>
+        </div>
+
+        <div class="m-card">
+            <span class="numero">04</span>
+            <h3>Seguimiento</h3>
+            <p>Monitoreamos los cambios normativos y ajustamos tu estrategia para mantenerte siempre al día.</p>
+        </div>
+    </div>
+</section>
+<!-- CONTACTO / FOOTER DE INMEDIATEZ -->
+    <footer id="contacto">
+        <div class="container-contacto">
+            
+            <div class="contacto-pro">
+                <h2>¿Puedo ayudarte?</h2>
+                
+                <a href="https://wa.me/34678775457" target="_blank" class="btn-whatsapp-directo">
+                    Contactar por WhatsApp <span class="flecha">→</span>
+                </a>
+
+                
+            </div>
+
+            <div class="contacto-info">
+                <div class="info-block">
+                    <h3>Atención al Público</h3>
+                    <p>Lunes a Viernes — 09:30h a 19:00h</p>
+                </div>
+                
+                <div class="info-block">
+                    <h3>Asesoría Fiscal</h3>
+                    <p>Supervisamos cada operación para garantizar seguridad jurídica, control fiscal y tranquilidad durante todo el proceso.</p>
+                </div>
+
+                <div class="info-block">
+                    <h3>Oficina</h3>
+                    <p>Rambla Rafael Casanova 39, Sant Boi de Llobregat.</p>
+                </div>
+                <div class="mapa-contenedor">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2997.585721110825!2d2.038446!3d41.3444265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a498a44b829633%3A0xc3f88f121d15c7e0!2sRambla%20de%20Rafael%20Casanova%2C%2039%2C%2008830%20Sant%20Boi%20de%20Llobregat%2C%20Barcelona!5e0!3m2!1ses!2ses!4v1716024000000!5m2!1ses!2ses" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- FRANJA DE COLOR CON DATOS Y COPYRIGHT CENTRADO -->
+       <div class="franja-corporativa">
+            
+            <div class="footer-copyright">
+                AV Fincas © 2026 — Todos los derechos reservados
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT DE DESPLAZAMIENTO FLUIDO -->
+    <script>
+        // 1. Lógica de las flechas
+        function scrollSlider(id, direction) {
+            const slider = document.getElementById(id);
+            // Calculamos el ancho de una tarjeta + el gap (40px)
+            const cardWidth = slider.querySelector('.i-card, .r-card').offsetWidth + 40; 
+            slider.scrollBy({ left: cardWidth * direction, behavior: 'smooth' });
+        }
+
+        // 2. Lógica del efecto Fade-in (IntersectionObserver)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Seleccionamos todas las secciones con fade-in-section
+        document.querySelectorAll('.fade-in-section').forEach((section) => {
+            observer.observe(section);
+        });
+    </script>
+    <script>
+
+function toggleCard(element) {
+    // Solo alternamos la clase 'active' del elemento clicado.
+    // Al quitar el forEach, las demás tarjetas se mantienen en su estado actual.
+    element.classList.toggle('active');
+}
+
+</script>
+</body>
+</html>
